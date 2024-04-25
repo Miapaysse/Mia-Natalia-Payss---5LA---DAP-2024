@@ -5,8 +5,11 @@ import 'package:go_router/go_router.dart';
 
 
 class LoginScreen extends StatelessWidget {
-   LoginScreen({super.key});
   
+
+   LoginScreen({super.key});
+
+
   TextEditingController passController = TextEditingController() ;
   TextEditingController userController = TextEditingController() ;
 
@@ -50,8 +53,9 @@ class LoginScreen extends StatelessWidget {
                 if ((inputUser == "Ale") && (inputPass == "Anuel2006") ){
                   print("Inicio de sesión exitoso");
                   
-                  context.push('/home');
+                  context.pushNamed(HomeScreen.name , extra: inputUser);
                 }
+                
                 else{
                   print("Inicio de sesión fallido");
                 }

@@ -10,10 +10,13 @@ initialLocation: '/login',
  routes: [
 
   GoRoute(path:'/login', 
+
   builder: (context, state) => LoginScreen() ,),
 
   GoRoute(path:'/home', 
-  builder: (context, state) => const HomeScreen() ,)
+  name: HomeScreen.name,
+  builder: (context, state) =>  HomeScreen(userName: state.extra as String),
+  ),
 
 
 
