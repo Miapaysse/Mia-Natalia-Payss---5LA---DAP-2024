@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Bienvenido' , style:  TextStyle(fontSize: 40)),
+            const Text('Bienvenid@' , style:  TextStyle(fontSize: 40)),
             Text( userName , style: const TextStyle(fontSize: 30, color: Color.fromRGBO(70, 73, 255, 0.612)),),
           ],
         ),
