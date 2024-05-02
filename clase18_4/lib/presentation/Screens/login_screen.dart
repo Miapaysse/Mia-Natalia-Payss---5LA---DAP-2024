@@ -1,76 +1,86 @@
-import 'package:clase18_4/presentation/Screens/home_screen.dart';
-
+// ignore: unused_import
+import 'package:clase18_4/presentation/Screens/Login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 
+void main() {
+  runApp( LoginScreen());
+}
+  // ignore: prefer_typing_uninitialized_variables
+  const String name = 'login';
+
+
+
 class LoginScreen extends StatelessWidget {
-  
+  static const String name = 'login';
 
    LoginScreen({super.key});
 
 
-  TextEditingController passController = TextEditingController() ;
-  TextEditingController userController = TextEditingController() ;
+  final TextEditingController userController = TextEditingController();
+    final TextEditingController userController2 = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  String ingresado = userController.text;
+String ingresado2 = userController2.text;
+                  if (ingresado == "Eitu" && ingresado2=="Cher") {
+                    // ignore: avoid_print
+                    print("Funciona la app");
+                    context.push('home');
+                  }
+                  else {
+                    // ignore: avoid_print
+                    print ("No funca");
+                  }
 
-    return Scaffold(
-      
-        body: Column (mainAxisAlignment: MainAxisAlignment.center,
-          
-          children: [
-            
-             TextField(
-              controller: userController,
-              decoration: const InputDecoration(
-                hintText: 'Username',
-                icon: Icon(Icons.person_2_outlined),
-             ),
-            ),
 
-             TextField(
-              controller: passController,
-              decoration: const InputDecoration(
-                hintText: 'Password',
-                icon: Icon(Icons.lock_clock_outlined),
+
+
+                },
+                child: const Text("LogIn"),
               ),
-              obscureText: true,
-            ),
+              TextField(
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Usuario",
+                prefixIcon: (Icon(Icons.person)),
 
-             const SizedBox(height: 50),
 
-             ElevatedButton(
-              onPressed: (){
-                String inputUser = userController.text;
-                String inputPass = passController.text;
+                ),
+               
+               
+               
+               
+                controller: userController),
 
-                if(inputPass.isEmpty || inputUser.isEmpty){
-                  print("Contraseña o User vacíos");
-                }
+TextField(
+                decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Contraseña",
+                prefixIcon: (Icon(Icons.key)),
 
-                if ((inputUser == "Mia") && (inputPass == "Anuel2006") ){
-                  print("Inicio de sesión exitoso");
-                  
-                  context.pushNamed(HomeScreen.name , extra: inputUser);
-                }
-                
-                else{
-                  print("Inicio de sesión fallido");
-                }
-                }, 
-              
-              child: const Text('Login'), 
 
-            ),
-
-            
-        
-        
-        ],),
-      );
-    
-
+                ),
+               
+               
+               
+               
+                controller: userController2),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
