@@ -1,0 +1,23 @@
+Colecciones de datos: Arrays(vectores), Matrices, etc
+
+Lista dif Array
+- Array-vector --> Tamaño fijo 
+- Lists --> Tamaño dinámico, principio 0 y va sumando 
+
+Ventaja de los arrays --> Velocidad --> Ya sabe donde ir a buscar las cosas porque reserva espacios de memoria ordenados
+
+Listas --> Tarda en encontrar la info
+
+Cuando sé el tamaño --> Array --> Cuando sé el tamaño? --> Fotos, archivos, audio --> tamaño fijo 
+
+El resto dinámico --> Listas 
+
+Listas --> declaración muy parecida a un vector 
+
+Por q listas? --> Pantallas app, mostrar listados de cosas CRITICO --> lista de widgets, listas de strings --> Hacer apps = Hacer listas 
+
+
+DART 
+
+
+
