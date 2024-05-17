@@ -10,9 +10,8 @@ class LoginScreen extends StatelessWidget {
   TextEditingController passController = TextEditingController() ;
   TextEditingController userController = TextEditingController() ;
   List<String> users = ['Mia' , 'Juan' , 'Ana' , 'Natu' , 'Pitoco'];
-  List<int> passwords = [1234 , 8888 , 8383, 4213 , 3075];
-  bool estaEnListaUsuarios;
-  bool estaEnListaConstra;
+  List<String> passwords = ['1234', '8888' , '8383', '4213' , '3075'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,18 +52,34 @@ class LoginScreen extends StatelessWidget {
 
                 if (users.contains(inputUser)){
                   print("User valido");
+                  int i = users.indexOf(inputUser);
 
+                  if (inputPass == passwords[i]){
 
-                 //LOGIN EXITOSO VA EN OTRA IF SEGURO
-                 const  SnackBar snackBar = SnackBar(
+                    const  SnackBar snackBar = SnackBar(
                     content:  Text('Login exitoso'),
                    );
                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  
                   context.pushNamed(HomeScreen.name , extra: inputUser);
+
+                  }
+
+                  else{
+                  print("Contraseña incorrecta");
+                  const  SnackBar snackBar = SnackBar(
+                    content:  Text('Contraseña incorrecta'),
+                   );
+                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                }
+                  
+                 
                 }
                 else{
-                  print("Inicio de sesión fallido");
+                  print("Inicio de sesión fallido, usuario no válido");
+                  const  SnackBar snackBar = SnackBar(
+                    content:  Text('Usuario no válido'),
+                   );
+                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
                 }, 
               
