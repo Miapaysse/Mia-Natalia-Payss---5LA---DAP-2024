@@ -21,3 +21,13 @@ DART
 
 
 
+23/5
+
+Lista en pantalla --> Distintos formatos de visualización 
+
+Flutter --> Lista de Widgets
+
+Lista --> Info --> Text --> Sale de otra lista 
+
+Consigna: Lista de 10 cards con título y subtitulo
+
