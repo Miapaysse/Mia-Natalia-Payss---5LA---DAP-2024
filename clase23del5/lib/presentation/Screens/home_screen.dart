@@ -27,11 +27,11 @@ String userName;
             return Card(
               child:ListTile(
                 title:Text(empleados[index]),
-                subtitle: Text(departamentos[index]), 
-            ),
-          );
-    
-        }),
+                subtitle: Text(departamentos[index],),
+              ),
+            );
+            
+            }),
 
       ),
     );

@@ -35,6 +35,7 @@ class LoginScreen extends StatelessWidget {
               decoration: const InputDecoration(
                 hintText: 'Password',
                 icon: Icon(Icons.lock_clock_outlined),
+                
               ),
               obscureText: true,
             ),
@@ -87,7 +88,7 @@ class LoginScreen extends StatelessWidget {
                 }
                 }, 
               
-              child: const Text('Login'), 
+              child: const Text('Login',style: TextStyle(fontWeight: FontWeight.bold , color: Color.fromARGB(255, 18, 3, 118)),) 
 
             ),
 
