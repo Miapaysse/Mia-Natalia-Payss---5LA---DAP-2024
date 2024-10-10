@@ -1,0 +1,166 @@
+Gestores de estado
+
+Pantalla
+----------------|
+                |
+                |
+                |
+                |
+                |
+                |
+                |
+                |
+                |
+
+Elementos estaticos y dinámicos 
+
+ESTATICOS --> constantes
+
+DINAMICOS --> Variables
+
+Estado --> foto de las variables en un determinado momento
+
+Cada vez que una variable cambie la pantalla se tiene q actualizar
+
+Statefull --> tiene estados, los manejo --> muy limitado 
+- Muchos otros gestores de estado 
+
+Stateless --> si quiero contador stateless la variable aumenta pero no se actualiza la pantalla 
+
+Gestores de estado:
+
+Estado global de la aplicación 
+Lo consumen/ lo ven varias pantallas
+La librería es reactiva --> Escucha/observa si hubo algun cambio --> Si cambia alguna variable, se redibuja la pantallaa
+
+Librerías --> todas buenas 
+Riverpod
+Bloc
+Getx
+Provider
+
+Riverpod
+Providers --> 1 por cada variable --> proveen el estado de la variable --> Lo puedo leer o moddificar
+Leer: Read (1 vez) o Watch (observar)
+Cambiar: Notifier.state --> Variable que quiero cambiar 
+----------------|
+State --> ref   |
+ProviderN       |
+                |
+                |
+                |
+                |
+                |
+                |
+                |
+
+Cambia el flujo de info en una pantalla
+
+----------------      |
+counter = watch cP    |
+ProviderN             |  
+                      |  
+                      |  STATE 
+                      |
+notifier              |
+                      |
+                      |       
+
+
+PROGRAMACION
+
+Arriba
+int counter = 0;
+
+en la columna
+floatingactionbutton floatingactionbutton(
+Onpressed(){
+counter ++;
+}
+)
+
+crear provider pra el counter
+
+Puv.dev --> flutter_riverpod
+
+MAIN
+Avisar q usamos como gestor de esto riverpod --> en el main
+
+runapp (const providerscope(child: mainApp{aca va la app}),);
+
+CARPETA PROVIDERS
+
+Counter_provider.dart
+
+StateProvider<int> counterProvider = StateProvider((ref) == 0); --> constructor y su valor inicial 
+
+PANTALLA
+ConsumerWidget()
+
+Build(lo que esta , ref)
+
+final counter = ref.watch(counterProvider)
+
+ref.read.(counterProvider.notifier).state ++;
+
+  
+
+ABM --> Alta, Baja y modiificación 
+
+Crear un objeto y agregarlo a la lista
+
+
+Lo q cambio es la lista --> provideer pra la lista
+
+nombres_provider.dart
+
+StateProvider<List<String>> nombresProvider 
+
+final nombres = refff.watch(nombresProvider);
+
+
+ref.read.(nombresProvider.notifier).state.add:"Nuevo Nombre";
+
+
+TAREAS:
+
+Lista de Strings pero q el mas te lleve a una pantalla con un form con un boton q cuando lo agrego ahí se agrega en la otra pantalla
+
+Si aprieto los nombres me lleva a la otra pantalla para editarlo o eliminarlo, donde ya se ve escrito lo q esta 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Manejo de tareas asincrónicas 
+
+
+
+

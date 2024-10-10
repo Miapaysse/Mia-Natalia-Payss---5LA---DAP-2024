@@ -1,0 +1,28 @@
+EN CARPETA "Entities" ADENTRO DE LIB 
+
+Archivo User.dart
+
+class User{
+  String email;
+  String password
+    User({require this.mail , require this.password});
+}
+
+EN EL LOGIN 
+
+en vez de las listas de users y passwords
+
+List<User> userList = {
+User(email:'Ale@mail.com' , password:'778'),
+User(email:'Ale@mail.com' , password:'778'),
+User(email:'Ale@mail.com' , password:'778'),
+
+};
+
+Modificacion if del ruteo del login 
+
+if(userList.any((user)=>
+user.email == inputUser &&
+user.password == inputPassword)){}
+
+userList.forEach((user){print(user.email);})
