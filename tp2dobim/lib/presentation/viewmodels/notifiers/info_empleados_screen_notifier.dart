@@ -2,9 +2,8 @@ import 'package:clase18_4/entities/Empleados_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
-
 import '../../utils/base_screen_state.dart';
-
+import '../states/info_empleados_screen_state.dart';
 
 class InfoempleadosScreenNotifier extends AutoDisposeNotifier<InfoempleadosScreenState> {
   late final EmpleadosRepository empleadosRepository =
@@ -22,10 +21,10 @@ class InfoempleadosScreenNotifier extends AutoDisposeNotifier<InfoempleadosScree
     );
 
     try {
-      final note = await empleadosRepository.getEmpleadoById(empleadoId);
+      final empleado = await empleadosRepository.getEmpleadoById(empleadoId);
       state = state.copyWith(
         screenState: BaseScreenState.idle,
-        note: note,
+        empleado: empleado,
       );
     } catch (error) {
       state = state.copyWith(

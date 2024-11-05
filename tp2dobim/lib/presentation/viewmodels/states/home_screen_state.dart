@@ -3,29 +3,28 @@ import 'package:equatable/equatable.dart';
 import '../../../entities/empleado.dart';
 import '../../utils/base_screen_state.dart';
 
-class HomeScreenState extends Equatable {
+class HomeScreenState {
   final BaseScreenState screenState;
+  final List<Empleado>? empleados;  // Make it nullable here
   final String? error;
-  final List<Empleado> empleados;
 
   const HomeScreenState({
     this.screenState = BaseScreenState.idle,
+    this.empleados,  // Allow nullable empleados
     this.error,
-    this.empleados = const [],
   });
 
   HomeScreenState copyWith({
     BaseScreenState? screenState,
+    List<Empleado>? empleados,  // Allow nullable empleados here
     String? error,
-    List<Empleado>? notes,
   }) {
     return HomeScreenState(
       screenState: screenState ?? this.screenState,
+      empleados: empleados ?? this.empleados,  // If no new empleados, use the current ones
       error: error ?? this.error,
-      empleados: empleados ?? this.empleados,
     );
   }
-
-  @override
-  List<Object?> get props => [screenState, error, empleados];
 }
+
+

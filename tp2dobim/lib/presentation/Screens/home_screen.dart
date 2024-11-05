@@ -1,4 +1,3 @@
-
 import 'package:clase18_4/entities/Empleado.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,11 +10,11 @@ import '../widgets/empleado_item.dart';
 import 'infoempleados_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
-static const  name = 'home';
-const HomeScreen({super.key, required String userName});
-@override
-ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
+  static const name = 'home';
+  const HomeScreen({super.key, required String userName});
 
+  @override
+  ConsumerState<ConsumerStatefulWidget> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
@@ -23,7 +22,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void initState() {
     super.initState();
 
-    // Fetch notes after the first frame is rendered
+    // Fetch employees after the first frame is rendered
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(homeScreenViewModelProvider.notifier).fetchEmpleados();
     });
@@ -33,26 +32,38 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final state = ref.watch(homeScreenViewModelProvider);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Empleados'),
-      ),
-      body: state.screenState.when(
-        idle: () {
-          return _HomeScreen(
-            empleados: state.empleados,
-            onRefresh: _onRefresh,
-            onEmpleadoTap: (empleado) => _onEmpleadoTap(context, empleado.id ?? -1),
-          );
-        },
-        loading: () => const Center(
-          child: CircularProgressIndicator(),
+    // Check state using simple if-else
+    if (state.screenState == BaseScreenState.loading) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Empleados'),
         ),
-        error: () => Center(
-          child: Text('Error: ${state.error ?? 'Unknown'}'),
+        body: const Center(child: CircularProgressIndicator()),
+      );
+    } else if (state.screenState == BaseScreenState.error) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Empleados'),
         ),
-      ),
-    );
+        body: Center(
+          child: Text('Error: ${state.error ?? 'Unknown error'}'),
+        ),
+      );
+    } else if (state.screenState == BaseScreenState.idle) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('My Empleados'),
+        ),
+        body: _HomeScreen(
+          empleados: state.empleados,
+          onRefresh: _onRefresh,
+          onEmpleadoTap: (empleado) => _onEmpleadoTap(context, empleado.id ?? -1),
+        ),
+      );
+    }
+
+    // Fallback
+    return const SizedBox.shrink();
   }
 
   Future<void> _onRefresh() async {
@@ -62,20 +73,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   void _onEmpleadoTap(BuildContext context, int empleadoId) {
     context.pushNamed(
       InfoempleadosScreen.name,
-      pathParameters: appRouter.infoEmpleadosScreenParameters(empleadoId),
+      pathParameters: AppRouter.infoEmpleadosScreenParameters(empleadoId),
     );
   }
 }
 
 class _HomeScreen extends StatelessWidget {
-  _HomeScreen({
-    super.key,
+   _HomeScreen({
     required this.empleados,
     required this.onRefresh,
     required this.onEmpleadoTap,
   });
 
-  final List<Empleado> empleados;
+  final List<Empleado>? empleados;  // Nullable list of empleados
   final Future<void> Function() onRefresh;
   final Function(Empleado) onEmpleadoTap;
 
@@ -90,12 +100,16 @@ class _HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (empleados == null || empleados!.isEmpty) {
+      return const Center(child: Text('No empleados available.'));
+    }
+
     return RefreshIndicator(
       onRefresh: onRefresh,
       child: ListView.builder(
-        itemCount: empleados.length,
+        itemCount: empleados!.length,  // Safe to access because we know it's not null
         itemBuilder: (context, index) {
-          final empleado = empleados[index];
+          final empleado = empleados![index];  // Safe to access because we know it's not null
           return EmpleadoItem(
             empleado: empleado,
             onTap: () => onEmpleadoTap(empleado),

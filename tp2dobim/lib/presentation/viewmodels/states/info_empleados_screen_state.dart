@@ -1,35 +1,30 @@
-import 'package:clase18_4/entities/Empleados_repository.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import '../../../core/providers.dart';
+import 'package:clase18_4/entities/Empleado.dart';
+import 'package:equatable/equatable.dart';
 import '../../utils/base_screen_state.dart';
 
-class InfoempleadosScreenNotifier extends AutoDisposeNotifier<InfoempleadosScreenState> {
-  late final EmpleadosRepository empleadosRepository =
-      ref.read(empleadosRepositoryProvider);
+class InfoempleadosScreenState extends Equatable {
+  final BaseScreenState screenState;
+  final Empleado? empleado;
+  final String? error;
+
+  const InfoempleadosScreenState({
+    this.screenState = BaseScreenState.idle,
+    this.empleado,
+    this.error,
+  });
+
+  InfoempleadosScreenState copyWith({
+    BaseScreenState? screenState,
+    Empleado? empleado,
+    String? error,
+  }) {
+    return InfoempleadosScreenState(
+      screenState: screenState ?? this.screenState,
+      empleado: empleado ?? this.empleado,
+      error: error ?? this.error,
+    );
+  }
 
   @override
-  InfoempleadosScreenState build() {
-    return const InfoempleadosScreenState();
-  }
-
-  Future<void> fetchEmpleado(int empleadoId) async {
-    state = state.copyWith(
-      screenState: BaseScreenState.loading,
-      error: null,
-    );
-
-    try {
-      final note = await empleadosRepository.getEmpleadoById(empleadoId);
-      state = state.copyWith(
-        screenState: BaseScreenState.idle,
-        note: note,
-      );
-    } catch (error) {
-      state = state.copyWith(
-        screenState: BaseScreenState.error,
-        error: error.toString(),
-      );
-    }
-  }
+  List<Object?> get props => [screenState, empleado, error];
 }

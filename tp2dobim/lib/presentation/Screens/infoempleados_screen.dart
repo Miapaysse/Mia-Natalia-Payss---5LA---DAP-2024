@@ -17,20 +17,20 @@ class InfoempleadosScreen extends ConsumerStatefulWidget {
       _InfoempleadosScreenState();
 }
 
-class _InfoempleadosScreentate extends ConsumerState<InfoempleadosScreen> {
+class _InfoempleadosScreenState extends ConsumerState<InfoempleadosScreen> {
   @override
   void initState() {
     super.initState();
 
     // Fetch the note details after the first frame is rendered
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref.read(InfoempleadosScreenViewModelProvider.notifier).fetchEmpleado(widget.empleadoId);
+      ref.read(infoempleadosScreenViewModelProvider.notifier).fetchEmpleado(widget.empleadoId);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = ref.watch(InfoempleadosScreenViewModelProvider);
+    final state = ref.watch(infoempleadosScreenViewModelProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -38,7 +38,7 @@ class _InfoempleadosScreentate extends ConsumerState<InfoempleadosScreen> {
       ),
       body: state.screenState.when(
         idle: () {
-          if (state.note == null) {
+          if (state.empleado == null) {
             return const Center(
               child: Text('Empleado not found'),
             );
@@ -58,7 +58,6 @@ class _InfoempleadosScreentate extends ConsumerState<InfoempleadosScreen> {
 
 class _InfoempleadosScreen extends StatelessWidget {
   const _InfoempleadosScreen({
-    super.key,
     required this.empleado,
   });
 

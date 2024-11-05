@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -25,18 +24,25 @@ class HomeScreenNotifier extends Notifier<HomeScreenState> {
     await refresh();
   }
 
-  Future<void> refresh() async {
-    try {
-      final empleados = await empleadosRepository.getAllEmpleados();
-        state = state.copyWith(
-        screenState: BaseScreenState.idle,
-        notes: empleados.sortedBy((n) => n.createdAt),
-      );
-    } catch (error) {
+
+Future<void> refresh() async {
+  try {
+    // Get the list of Empleado
+    final empleados = await empleadosRepository.getAllEmpleados();
+    
+    // Ensure empleados is of type List<Empleado> and not List<Object>
+    if (empleados is List<Empleado>) {
       state = state.copyWith(
-        screenState: BaseScreenState.error,
-        error: error.toString(),
+        screenState: BaseScreenState.idle,
+        empleados: empleados.sortedBy((n) => n.createdAt),
       );
+    } else {
+      throw Exception('Fetched data is not of type List<Empleado>');
     }
+  } catch (error) {
+    state = state.copyWith(
+      screenState: BaseScreenState.error,
+      error: error.toString(),
+    );
   }
 }
