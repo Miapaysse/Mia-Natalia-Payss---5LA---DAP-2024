@@ -3,6 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/providers.dart';
+import '../../../entities/Empleado.dart';
 import '../../../entities/Empleados_repository.dart';
 import '../../utils/base_screen_state.dart';
 import '../states/home_screen_state.dart';
@@ -45,4 +46,5 @@ Future<void> refresh() async {
       error: error.toString(),
     );
   }
+}
 }

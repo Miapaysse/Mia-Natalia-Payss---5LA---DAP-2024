@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../entities/empleado.dart';
+import '../../../entities/Empleado.dart';
 import '../../utils/base_screen_state.dart';
 
 class HomeScreenState {
